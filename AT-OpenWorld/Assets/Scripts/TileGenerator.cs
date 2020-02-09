@@ -32,6 +32,9 @@ public class TileGenerator : MonoBehaviour
     [SerializeField]
     private Wave[] waves;
 
+    [SerializeField]
+    public int tileNumber = 0;
+
     private void Start()
     {
         GenerateTile();
@@ -59,6 +62,7 @@ public class TileGenerator : MonoBehaviour
         this.tileRenderer.material.mainTexture = tileTexture;
 
         UpdateMeshVertices(heightMap);
+       
           
     }
 
@@ -80,6 +84,7 @@ public class TileGenerator : MonoBehaviour
                 c_TerrainType terrain = ChooseTerrainType(height);
 
                 colourMap[colourIndex] = terrain.Colour;
+
             }
         }
 

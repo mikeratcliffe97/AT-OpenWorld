@@ -10,24 +10,27 @@ public class Level : MonoBehaviour
     private LevelGenerator levelGen;
     public int mapWidth = 0;
     public int mapDepth = 0;
+    public int numberofTiles = 0;
 
    
+
     public void Save()
     {
        
-        SaveManager.SaveData(this);
+        SaveManager.SaveLevelData(this);
     }
-
 
     public void Load()
     {
-        int[] loadedDims = SaveManager.LoadData();
+        int[] loadedDims = SaveManager.LoadLevelData();
         mapWidth = loadedDims[0];
         mapDepth = loadedDims[1];
+        numberofTiles = loadedDims[2];
         levelGen = GameObject.Find("Level").GetComponent<LevelGenerator>();
 
         levelGen.setDims();
         levelGen.GenerateMap();
+       // levelGen.SpawnPlayer();
        
 
     }
