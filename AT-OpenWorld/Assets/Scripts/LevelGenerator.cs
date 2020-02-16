@@ -129,7 +129,7 @@ public class LevelGenerator : MonoBehaviour
         {
 
 
-            Debug.Log("tile #" + levelTile.gameObject.GetComponent<TileGenerator>().tileNumber);
+          //  Debug.Log("tile #" + levelTile.gameObject.GetComponent<TileGenerator>().tileNumber);
         }
     
       
