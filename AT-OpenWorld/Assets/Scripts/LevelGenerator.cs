@@ -17,19 +17,20 @@ public class LevelGenerator : MonoBehaviour
     public GameObject player;
 
     private Level level;
-   
 
+    private GameObject tile;
     // Start is called before the first frame update
     void Start()
     {
         newmap = GameObject.Find("NewButton").GetComponent<Button>();
-        newmap.onClick.AddListener(delegate { setRandDims();  GenerateMap(); SpawnPlayer(); });
+        newmap.onClick.AddListener(delegate { GenerateMap(); SpawnPlayer(); });
 
         level = GameObject.Find("Level").GetComponent<Level>();
-        levelTile = GameObject.Find("LevelTile").GetComponent<GameObject>();
+       
+
         // GenerateMap();
 
-      
+
     }
 
     public void GenerateMap()
@@ -53,12 +54,16 @@ public class LevelGenerator : MonoBehaviour
                         this.gameObject.transform.position.y, this.gameObject.transform.position.z + zTileIndex * tileDepth);
 
                     
-                    GameObject tile = Instantiate(levelTile, tilePosition, Quaternion.identity) as GameObject;
-                    
+                   tile = Instantiate(levelTile, tilePosition, Quaternion.identity) as GameObject;
+
+                    tile.transform.SetParent(level.transform);
                     level.numberofTiles++;
                     levelTile.gameObject.GetComponent<TileGenerator>().tileNumber = level.numberofTiles;
                 }
             }
+
+            level.mapWidth = mapWidthInTiles;
+            level.mapDepth = mapDepthInTiles;
         }
         
     }
@@ -66,25 +71,27 @@ public class LevelGenerator : MonoBehaviour
     public void SpawnPlayer()
     {
       
-            Vector3 playerPos = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 5, this.gameObject.transform.position.z);
-       
-       GameObject currentPlayer =   Instantiate(player, playerPos, Quaternion.identity);
-        currentPlayer.SetActive(true);
-   
-       
+            Vector3 playerPos = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 20, this.gameObject.transform.position.z);
+
+        GameObject currentPlayer = Instantiate(player, playerPos, Quaternion.identity);
+        currentPlayer.transform.SetParent(level.transform);
+      
+
     }
 
     public void LoadPlayer(float xPos, float yPos, float zPos)
     {
 
-        Vector3 playerPos = new Vector3(xPos, xPos, zPos);
+        Vector3 playerPos = new Vector3(xPos, yPos +20, zPos);
 
         GameObject currentPlayer = Instantiate(player, playerPos, Quaternion.identity);
-        currentPlayer.SetActive(true);
 
+        currentPlayer.transform.SetParent(level.transform);
+        player = currentPlayer.GetComponent<GameObject>();
     }
 
 
+   
     public int getWidth()
     {
         int mWidth = mapWidthInTiles;
@@ -114,6 +121,20 @@ public class LevelGenerator : MonoBehaviour
         mapWidthInTiles = level.mapWidth;
         mapDepthInTiles = level.mapDepth;
     }
+
+    public void disableTiles()
+    {
+
+        if (levelTile.gameObject.GetComponent<TileGenerator>().tileNumber % 50 == 0 || levelTile.gameObject.GetComponent<TileGenerator>().tileNumber % 100 == 0)
+        {
+
+
+            Debug.Log("tile #" + levelTile.gameObject.GetComponent<TileGenerator>().tileNumber);
+        }
+    
+      
+    }
 }
+
 
 

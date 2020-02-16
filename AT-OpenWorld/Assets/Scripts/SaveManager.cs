@@ -15,6 +15,7 @@ public static class SaveManager
         SavedLevelData data = new SavedLevelData(level);
 
         bf.Serialize(stream, data);
+        Debug.Log("SAveD");
         stream.Close();
     }
 
@@ -26,6 +27,7 @@ public static class SaveManager
         SavedPlayerData p_data = new SavedPlayerData(player);
 
         bf.Serialize(stream, p_data);
+        Debug.Log("PSAved");
         stream.Close();
     }
     public static int[] LoadLevelData()
@@ -52,7 +54,7 @@ public static class SaveManager
 
 
 
-    public static int[] LoadPlayerData()
+    public static float[] LoadPlayerData()
     {
         if (File.Exists(Application.persistentDataPath + "/player.sav"))
         {
@@ -88,6 +90,7 @@ public class SavedLevelData
         dims[0] = level.mapWidth;
         dims[1] = level.mapDepth;
         dims[2] = level.numberofTiles;
+       
 
     }
 }
@@ -96,14 +99,14 @@ public class SavedLevelData
 public class SavedPlayerData
 {
 
-    public int[] pos;
+    public float[] pos;
 
     public SavedPlayerData(PlayerData player)
     {
-        pos = new int[3];
-        pos[0] = (int)player.playerX;
-        pos[1] = (int)player.playerY;
-        pos[2] = (int)player.playerZ;
+        pos = new float[3];
+        pos[0] = player.playerX;
+        pos[1] = player.playerY;
+        pos[2] = player.playerZ;
 
     }
 }
