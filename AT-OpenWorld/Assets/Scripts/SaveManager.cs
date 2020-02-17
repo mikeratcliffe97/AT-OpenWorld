@@ -7,6 +7,44 @@ using UnityEngine;
 
 public static class SaveManager
 {
+
+
+
+    public static void SaveTileData(TileData tileData)
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream stream = new FileStream(Application.persistentDataPath + "/tile.sav", FileMode.Create);
+
+        SavedTileData t_data = new SavedTileData(tileData);
+
+        bf.Serialize(stream, t_data);
+        Debug.Log("TSaved");
+
+        Debug.Log(tileData);
+        stream.Close();
+    }
+
+    public static float[,] LoadTileData()
+    {
+        if (File.Exists(Application.persistentDataPath + "/tile.sav"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream stream = new FileStream(Application.persistentDataPath + "/tile.sav", FileMode.Open);
+
+            SavedTileData t_data = bf.Deserialize(stream) as SavedTileData;
+
+            stream.Close();
+
+            return t_data.mapdata;
+        }
+
+        else
+        {
+            Debug.Log("this ain't it chief");
+            return null;
+
+        }
+    }
     public static void SaveLevelData(Level level)
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -19,17 +57,6 @@ public static class SaveManager
         stream.Close();
     }
 
-    public static void SavePlayerData(PlayerData player)
-    {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Create);
-
-        SavedPlayerData p_data = new SavedPlayerData(player);
-
-        bf.Serialize(stream, p_data);
-        Debug.Log("PSAved");
-        stream.Close();
-    }
     public static int[] LoadLevelData()
     {
         if (File.Exists(Application.persistentDataPath + "/map.sav"))
@@ -52,7 +79,17 @@ public static class SaveManager
         }
     }
 
+    public static void SavePlayerData(PlayerData player)
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream stream = new FileStream(Application.persistentDataPath + "/player.sav", FileMode.Create);
 
+        SavedPlayerData p_data = new SavedPlayerData(player);
+
+        bf.Serialize(stream, p_data);
+        Debug.Log("PSAved");
+        stream.Close();
+    }
 
     public static float[] LoadPlayerData()
     {
@@ -108,5 +145,34 @@ public class SavedPlayerData
         pos[1] = player.playerY;
         pos[2] = player.playerZ;
 
+    }
+}
+
+[Serializable]
+public class SavedTileData
+{
+
+    public float[,] mapdata;
+
+
+    public SavedTileData (TileData tileData)
+    {
+        mapdata = new float[7,2];
+        //tile depth
+        mapdata[0, 0] = tileData.heightMap[0, 0];
+        //tile width
+        mapdata[1, 0] = tileData.heightMap[1, 0];
+        //mapscale
+        mapdata[2, 0] = tileData.heightMap[2, 0];
+        //offsetX
+        mapdata[3, 0] = tileData.heightMap[3, 0];
+        //offsetZ
+        mapdata[4, 0] = tileData.heightMap[4, 0];
+        //waves
+        mapdata[5, 1] = tileData.heightMap[5, 1];
+
+        //id
+        mapdata[6, 0] = tileData.tileNumber;
+        
     }
 }

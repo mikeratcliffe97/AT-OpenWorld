@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class LevelGenerator : MonoBehaviour
 {
-   
+
     private Button newmap;
- 
+
     [SerializeField]
     private int mapWidthInTiles, mapDepthInTiles;
 
@@ -26,7 +26,7 @@ public class LevelGenerator : MonoBehaviour
         newmap.onClick.AddListener(delegate { GenerateMap(); SpawnPlayer(); });
 
         level = GameObject.Find("Level").GetComponent<Level>();
-       
+
 
         // GenerateMap();
 
@@ -35,11 +35,11 @@ public class LevelGenerator : MonoBehaviour
 
     public void GenerateMap()
     {
-        
-       
+
+
         if (mapWidthInTiles > 0)
         {//get dims from prefab
-          
+
             Vector3 tileSize = levelTile.GetComponent<MeshRenderer>().bounds.size;
             int tileWidth = (int)tileSize.x;
             int tileDepth = (int)tileSize.z;
@@ -47,42 +47,53 @@ public class LevelGenerator : MonoBehaviour
             //make new tile in position
             for (int xTileIndex = 0; xTileIndex < mapWidthInTiles; xTileIndex++)
             {
-           
+
                 for (int zTileIndex = 0; zTileIndex < mapDepthInTiles; zTileIndex++)
                 {
                     Vector3 tilePosition = new Vector3(this.gameObject.transform.position.x + xTileIndex * tileWidth,
                         this.gameObject.transform.position.y, this.gameObject.transform.position.z + zTileIndex * tileDepth);
 
-                    
-                   tile = Instantiate(levelTile, tilePosition, Quaternion.identity) as GameObject;
+
+                    tile = Instantiate(levelTile, tilePosition, Quaternion.identity) as GameObject;
 
                     tile.transform.SetParent(level.transform);
                     level.numberofTiles++;
-                    levelTile.gameObject.GetComponent<TileGenerator>().tileNumber = level.numberofTiles;
+                    levelTile.gameObject.GetComponent<TileData>().tileNumber = level.numberofTiles;
+                    levelTile.name = "levelTile: " + level.numberofTiles;
+
+                    if (level.numberofTiles == 2500 || level.numberofTiles == 5000)
+                    {
+                        levelTile.name = "levelTile: 0";
+                    }
+
+                    if (levelTile.gameObject.GetComponent<TileData>().tileNumber == 2500 || levelTile.gameObject.GetComponent<TileData>().tileNumber == 5000)
+                    {
+                        levelTile.gameObject.GetComponent<TileData>().tileNumber = 0;
+                    }
                 }
             }
 
             level.mapWidth = mapWidthInTiles;
             level.mapDepth = mapDepthInTiles;
         }
-        
+
     }
 
     public void SpawnPlayer()
     {
-      
-            Vector3 playerPos = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 20, this.gameObject.transform.position.z);
+
+        Vector3 playerPos = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 20, this.gameObject.transform.position.z);
 
         GameObject currentPlayer = Instantiate(player, playerPos, Quaternion.identity);
         currentPlayer.transform.SetParent(level.transform);
-      
+
 
     }
 
     public void LoadPlayer(float xPos, float yPos, float zPos)
     {
 
-        Vector3 playerPos = new Vector3(xPos, yPos +20, zPos);
+        Vector3 playerPos = new Vector3(xPos, yPos + 20, zPos);
 
         GameObject currentPlayer = Instantiate(player, playerPos, Quaternion.identity);
 
@@ -91,7 +102,7 @@ public class LevelGenerator : MonoBehaviour
     }
 
 
-   
+
     public int getWidth()
     {
         int mWidth = mapWidthInTiles;
@@ -111,7 +122,7 @@ public class LevelGenerator : MonoBehaviour
         mapWidthInTiles = randWidth;
         mapDepthInTiles = randDepth;
 
-    
+
         level.mapWidth = mapWidthInTiles;
         level.mapDepth = mapDepthInTiles;
     }
@@ -122,18 +133,6 @@ public class LevelGenerator : MonoBehaviour
         mapDepthInTiles = level.mapDepth;
     }
 
-    public void disableTiles()
-    {
-
-        if (levelTile.gameObject.GetComponent<TileGenerator>().tileNumber % 50 == 0 || levelTile.gameObject.GetComponent<TileGenerator>().tileNumber % 100 == 0)
-        {
-
-
-          //  Debug.Log("tile #" + levelTile.gameObject.GetComponent<TileGenerator>().tileNumber);
-        }
-    
-      
-    }
 }
 
 

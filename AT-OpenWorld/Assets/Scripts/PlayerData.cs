@@ -31,7 +31,7 @@ public class PlayerData : MonoBehaviour
         playerY = this.transform.position.y;
         playerZ = this.transform.position.z;
 
-        levelGen.disableTiles();
+     //   levelGen.disableTiles();
     
     }
 
@@ -51,7 +51,7 @@ public class PlayerData : MonoBehaviour
         playerY = (float)loadedPos[1];
         playerZ = (float)loadedPos[2];
 
-       
+        levelGen = GameObject.Find("Level").GetComponent<LevelGenerator>();
         levelGen.LoadPlayer(playerX, playerY, playerZ);
 
     }

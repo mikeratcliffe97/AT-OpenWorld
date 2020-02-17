@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileGenerator : MonoBehaviour
+public class TileData : MonoBehaviour
 {
 
     [SerializeField]
@@ -35,6 +35,9 @@ public class TileGenerator : MonoBehaviour
     [SerializeField]
     public int tileNumber = 0;
 
+    [SerializeField]
+    public float[,] heightMap;
+
     private void Start()
     {
         GenerateTile();
@@ -54,16 +57,16 @@ public class TileGenerator : MonoBehaviour
         //calculate offset
 
 
-        float[,] heightMap = this.mapGeneration.GenerateMap(tileDepth, tileWidth, this.mapScale, offsetX, offsetZ, waves);
-
+       //  heightMap = this.mapGeneration.GenerateMap(tileDepth, tileWidth, this.mapScale, offsetX, offsetZ, waves);
+        heightMap = SaveManager.LoadTileData();
 
         //generate heightmap
         Texture2D tileTexture = BuildTexture(heightMap);
         this.tileRenderer.material.mainTexture = tileTexture;
 
         UpdateMeshVertices(heightMap);
-       
-          
+
+        
     }
 
     private Texture2D BuildTexture(float[,] heightMap)
@@ -95,7 +98,7 @@ public class TileGenerator : MonoBehaviour
         tileTexture.Apply();
 
         return tileTexture;
-   }
+    }
 
     private void UpdateMeshVertices(float[,] heightMap)
     {
@@ -130,12 +133,12 @@ public class TileGenerator : MonoBehaviour
         //update collider
         this.meshCollider.sharedMesh = this.meshFilter.mesh;
     }
-    
+
     c_TerrainType ChooseTerrainType(float height)
     {
         //checks if height is lower than the one for the expected type
 
-        foreach(c_TerrainType terrainType in terrainTypes)
+        foreach (c_TerrainType terrainType in terrainTypes)
         {
             if (height < terrainType.height)
             {
@@ -146,8 +149,13 @@ public class TileGenerator : MonoBehaviour
         //else null
         return terrainTypes[terrainTypes.Length - 1];
     }
-}
 
+
+    public void SaveTile()
+    {
+        SaveManager.SaveTileData(this);
+    }
+}
 //Terrain Class (c for class smileyface )
 [System.Serializable]
 public class c_TerrainType

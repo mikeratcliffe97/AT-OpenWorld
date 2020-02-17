@@ -127,7 +127,7 @@ MonoBehaviour:
     height: 0.6
     Colour: {r: 0.46709123, g: 0.9811321, b: 0.22677112, a: 0}
   - name: 
-    height: 0.9
+    height: 0.8
     Colour: {r: 0.93333334, g: 0.42734575, b: 0.0588235, a: 0}
   - name: 
     height: 1
@@ -181,3 +181,7 @@ MonoBehaviour:
   - seed: 6712
     frequency: 0.4
     amplitude: 5
+  - seed: 2000
+    frequency: 0.1
+    amplitude: 2
+  tileNumber: 0
