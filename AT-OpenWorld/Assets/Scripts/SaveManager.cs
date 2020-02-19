@@ -8,13 +8,13 @@ using UnityEngine;
 public static class SaveManager
 {
 
-
+    
 
     public static void SaveTileData(TileData tileData)
     {
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream stream = new FileStream(Application.persistentDataPath + "/tile.sav", FileMode.Create);
-
+        FileStream stream = new FileStream(Application.persistentDataPath + "/tile" + tileData.tileNumber + ".sav", FileMode.Create);
+      
         SavedTileData t_data = new SavedTileData(tileData);
 
         bf.Serialize(stream, t_data);
@@ -26,24 +26,35 @@ public static class SaveManager
 
     public static float[,] LoadTileData()
     {
-        if (File.Exists(Application.persistentDataPath + "/tile.sav"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream stream = new FileStream(Application.persistentDataPath + "/tile.sav", FileMode.Open);
+        //If one exists they prolly all do
+        
+            //Loop all
+            for (int i = 0; i <= 2500; i++)
+            {
 
-            SavedTileData t_data = bf.Deserialize(stream) as SavedTileData;
+            if (File.Exists(Application.persistentDataPath + "/tile" + i + ".sav"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
 
-            stream.Close();
+                FileStream stream = new FileStream(Application.persistentDataPath + "/tile" + i + ".sav", FileMode.Open);
 
-            return t_data.mapdata;
+                SavedTileData t_data = bf.Deserialize(stream) as SavedTileData;
+
+                stream.Close();
+
+                return t_data.tData;
+            }
+
+            else
+            {
+                Debug.Log("this ain't it chief");
+                return null;
+
+            }
+                
         }
 
-        else
-        {
-            Debug.Log("this ain't it chief");
-            return null;
-
-        }
+        return null;
     }
     public static void SaveLevelData(Level level)
     {
@@ -152,27 +163,32 @@ public class SavedPlayerData
 public class SavedTileData
 {
 
-    public float[,] mapdata;
+    public float[,] tData;
 
 
     public SavedTileData (TileData tileData)
     {
-        mapdata = new float[7,2];
-        //tile depth
-        mapdata[0, 0] = tileData.heightMap[0, 0];
-        //tile width
-        mapdata[1, 0] = tileData.heightMap[1, 0];
-        //mapscale
-        mapdata[2, 0] = tileData.heightMap[2, 0];
-        //offsetX
-        mapdata[3, 0] = tileData.heightMap[3, 0];
-        //offsetZ
-        mapdata[4, 0] = tileData.heightMap[4, 0];
-        //waves
-        mapdata[5, 1] = tileData.heightMap[5, 1];
 
+        //Saves tile data
+       float[,] tData = new float[6,0];
+        //tile depth
+        tData[0, 0] = tileData.heightMap[0, 0];
+        //tile width
+        tData[1, 0] = tileData.heightMap[1, 0];
+        //mapscale
+        tData[2, 0] = tileData.heightMap[2, 0];
+        //offsetX
+        tData[3, 0] = tileData.heightMap[3, 0];
+        //offsetZ
+        tData[4, 0] = tileData.heightMap[4, 0];
+        //waves
+        //tData[5, 1] = tileData.heightMap[5, 1];
+
+        tData[5, 0] = tileData.tileNumber;
+
+        //waves
         //id
-        mapdata[6, 0] = tileData.tileNumber;
-        
+
+
     }
 }

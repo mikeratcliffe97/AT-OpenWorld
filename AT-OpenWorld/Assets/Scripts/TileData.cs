@@ -5,6 +5,8 @@ using UnityEngine;
 public class TileData : MonoBehaviour
 {
 
+    private Level level;
+
     [SerializeField]
     private c_TerrainType[] terrainTypes;
 
@@ -29,8 +31,8 @@ public class TileData : MonoBehaviour
     [SerializeField]
     private AnimationCurve heightCurve;
 
-    [SerializeField]
-    private Wave[] waves;
+   // [SerializeField]
+    //private Wave[] waves;
 
     [SerializeField]
     public int tileNumber = 0;
@@ -40,8 +42,9 @@ public class TileData : MonoBehaviour
 
     private void Start()
     {
+         level = GameObject.Find("Level").GetComponent<Level>();
         GenerateTile();
-
+      
     }
 
     void GenerateTile()
@@ -57,15 +60,16 @@ public class TileData : MonoBehaviour
         //calculate offset
 
 
-       //  heightMap = this.mapGeneration.GenerateMap(tileDepth, tileWidth, this.mapScale, offsetX, offsetZ, waves);
-        heightMap = SaveManager.LoadTileData();
+        // heightMap = this.mapGeneration.GenerateMap(tileDepth, tileWidth, this.mapScale, offsetX, offsetZ);//, waves);
+        heightMap = this.mapGeneration.GenerateMap((int)LoadData(0), (int)LoadData(1), (int)LoadData(2), (int)LoadData(3), (int)LoadData(4));
 
         //generate heightmap
-        Texture2D tileTexture = BuildTexture(heightMap);
+        Texture2D tileTexture = BuildTexture(heightMap); //was heightmap
         this.tileRenderer.material.mainTexture = tileTexture;
 
-        UpdateMeshVertices(heightMap);
+        UpdateMeshVertices(heightMap); //was heightmap
 
+       //SaveTile();
         
     }
 
@@ -154,6 +158,15 @@ public class TileData : MonoBehaviour
     public void SaveTile()
     {
         SaveManager.SaveTileData(this);
+    }
+
+
+    public float LoadData(int i)
+    {
+        float[,] loadedData = SaveManager.LoadTileData();
+
+        float theFloatINeed = loadedData[i,0];
+        return theFloatINeed;
     }
 }
 //Terrain Class (c for class smileyface )

@@ -171,17 +171,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  waves:
-  - seed: 5613
-    frequency: 1
-    amplitude: 1
-  - seed: 9551
-    frequency: 0.8
-    amplitude: 2
-  - seed: 6712
-    frequency: 0.4
-    amplitude: 5
-  - seed: 2000
-    frequency: 0.1
-    amplitude: 2
   tileNumber: 0

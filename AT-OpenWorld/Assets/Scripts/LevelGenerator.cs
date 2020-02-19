@@ -28,10 +28,11 @@ public class LevelGenerator : MonoBehaviour
         level = GameObject.Find("Level").GetComponent<Level>();
 
 
-        // GenerateMap();
-
+        GenerateMap();
+        SpawnPlayer();
 
     }
+
 
     public void GenerateMap()
     {
