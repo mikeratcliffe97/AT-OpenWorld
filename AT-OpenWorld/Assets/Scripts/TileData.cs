@@ -40,6 +40,8 @@ public class TileData : MonoBehaviour
     [SerializeField]
     public float[,] heightMap;
 
+    public bool isWaypoint = false;
+
     private void Start()
     {
          level = GameObject.Find("Level").GetComponent<Level>();
@@ -60,8 +62,8 @@ public class TileData : MonoBehaviour
         //calculate offset
 
 
-        // heightMap = this.mapGeneration.GenerateMap(tileDepth, tileWidth, this.mapScale, offsetX, offsetZ);//, waves);
-        heightMap = this.mapGeneration.GenerateMap((int)LoadData(0), (int)LoadData(1), (int)LoadData(2), (int)LoadData(3), (int)LoadData(4));
+         heightMap = this.mapGeneration.GenerateMap(tileDepth, tileWidth, this.mapScale, offsetX, offsetZ);//, waves);
+        //heightMap = this.mapGeneration.GenerateMap((int)LoadData(0), (int)LoadData(1), (int)LoadData(2), (int)LoadData(3), (int)LoadData(4));
 
         //generate heightmap
         Texture2D tileTexture = BuildTexture(heightMap); //was heightmap

@@ -684,6 +684,11 @@ MonoBehaviour:
   mapDepthInTiles: 50
   levelTile: {fileID: 6374774124178247069, guid: 6d15ed1e8e0752e45a35da6980ae4749,
     type: 3}
+  trough: {fileID: 8818437925540766262, guid: a3b550a1f1bccbf43a2604c83a286f01, type: 3}
+  sheepObj: {fileID: 3292506736267207296, guid: de71382510f223a48ae64c6678d60748,
+    type: 3}
+  waypoint: {fileID: 8818437925540766262, guid: a3b550a1f1bccbf43a2604c83a286f01,
+    type: 3}
   player: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
 --- !u!4 &814976955
 Transform:
@@ -1045,7 +1050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1162462837
 MonoBehaviour:
   m_ObjectHideFlags: 0

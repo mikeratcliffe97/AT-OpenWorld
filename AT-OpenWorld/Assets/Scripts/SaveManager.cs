@@ -170,7 +170,7 @@ public class SavedTileData
     {
 
         //Saves tile data
-       float[,] tData = new float[6,0];
+       tData = new float[6,0];
         //tile depth
         tData[0, 0] = tileData.heightMap[0, 0];
         //tile width

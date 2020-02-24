@@ -20,8 +20,8 @@ public class PlayerData : MonoBehaviour
     {
         //   playerObject = GameObject.Find("RigidBodyFPSController").GetComponent<GameObject>();
         // characterController = playerObject.GetComponent<CharacterController>();
-        savebutton = GameObject.Find("SaveButton").GetComponent<Button>();
-        savebutton.onClick.AddListener(delegate { Save(); });
+     //   savebutton = GameObject.Find("SaveButton").GetComponent<Button>();
+      //  savebutton.onClick.AddListener(delegate { Save(); });
         levelGen = GameObject.Find("Level").GetComponent<LevelGenerator>();
     }
 
