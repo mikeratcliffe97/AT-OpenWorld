@@ -39,7 +39,7 @@ public class AIMovement : MonoBehaviour
         GameObject nextTarget;
         bool moving = false;
         nextTarget = (waypoints[SelectPoint(0)]);
-
+        Vector3 compareme = new Vector3 (nextTarget.transform.position.x + 10, nextTarget.transform.position.y + 10, nextTarget.transform.position.z + 10);
 
 
         // if (moving)
@@ -48,7 +48,7 @@ public class AIMovement : MonoBehaviour
         float fractOfDistance = distCovered / distance;
         this.transform.position = Vector3.Lerp(nextTarget.transform.position, nextTarget.transform.position, fractOfDistance);
 
-        Vector3 compareme = new Vector3 (nextTarget.transform.position.x + 10, nextTarget.transform.position.y + 10, nextTarget.transform.position.z + 10);
+      
 
         if (this.transform.position == compareme)
         {

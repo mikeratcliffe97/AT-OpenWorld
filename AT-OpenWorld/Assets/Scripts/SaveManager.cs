@@ -148,7 +148,7 @@ public class SavedPlayerData
 {
 
     public float[] pos;
-
+    
     public SavedPlayerData(PlayerData player)
     {
         pos = new float[3];
