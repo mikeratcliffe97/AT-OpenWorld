@@ -11,7 +11,7 @@ public class Level : MonoBehaviour
     [SerializeField]
     private GameObject levelTile;
 
-
+    private PlayerData player;
     public int mapWidth = 0;
     public int mapDepth = 0;
     public int numberofTiles = 0;
@@ -23,7 +23,8 @@ public class Level : MonoBehaviour
     }
     public void Save()
     {
-       
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>();
+        SaveManager.SavePlayerData(player);
         SaveManager.SaveLevelData(this);
     }
 

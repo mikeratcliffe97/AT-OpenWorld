@@ -7,6 +7,8 @@ public class TileData : MonoBehaviour
 
     private Level level;
 
+    public bool active;
+
     [SerializeField]
     private c_TerrainType[] terrainTypes;
 
@@ -31,8 +33,8 @@ public class TileData : MonoBehaviour
     [SerializeField]
     private AnimationCurve heightCurve;
 
-   // [SerializeField]
-    //private Wave[] waves;
+   [SerializeField]
+    private Wave[] waves;
 
     [SerializeField]
     public int tileNumber = 0;
@@ -62,7 +64,7 @@ public class TileData : MonoBehaviour
         //calculate offset
 
 
-         heightMap = this.mapGeneration.GenerateMap(tileDepth, tileWidth, this.mapScale, offsetX, offsetZ);//, waves);
+         heightMap = this.mapGeneration.GenerateMap(tileDepth, tileWidth, this.mapScale, offsetX, offsetZ, waves);
         //heightMap = this.mapGeneration.GenerateMap((int)LoadData(0), (int)LoadData(1), (int)LoadData(2), (int)LoadData(3), (int)LoadData(4));
 
         //generate heightmap

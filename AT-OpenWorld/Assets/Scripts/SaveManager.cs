@@ -64,7 +64,7 @@ public static class SaveManager
         SavedLevelData data = new SavedLevelData(level);
 
         bf.Serialize(stream, data);
-        Debug.Log("SAveD");
+        Debug.Log("Saved Level");
         stream.Close();
     }
 
@@ -129,17 +129,15 @@ public static class SaveManager
 [Serializable]
 public class SavedLevelData
 {
-
     public int[] dims;
-    
+
     public SavedLevelData(Level level)
     {
         dims = new int[3];
         dims[0] = level.mapWidth;
         dims[1] = level.mapDepth;
         dims[2] = level.numberofTiles;
-       
-
+     
     }
 }
 

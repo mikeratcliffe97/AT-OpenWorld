@@ -23,6 +23,7 @@ public class PlayerData : MonoBehaviour
      //   savebutton = GameObject.Find("SaveButton").GetComponent<Button>();
       //  savebutton.onClick.AddListener(delegate { Save(); });
         levelGen = GameObject.Find("Level").GetComponent<LevelGenerator>();
+        this.tag = "Player";
     }
 
     void Update()

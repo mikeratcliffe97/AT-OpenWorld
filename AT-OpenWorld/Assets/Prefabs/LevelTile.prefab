@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6374774124178247068}
   m_Layer: 0
   m_Name: LevelTile
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,25 +119,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c835e8a37a383a44abdef8410a509272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
   terrainTypes:
   - name: 
-    height: 0.1
-    Colour: {r: 0.17254901, g: 0.28466696, b: 0.94509804, a: 0}
+    height: 0.2
+    Colour: {r: 0.10012458, g: 0.8490566, b: 0.704102, a: 0}
   - name: 
     height: 0.3
-    Colour: {r: 0, g: 0.8666667, b: 0.03903354, a: 0}
+    Colour: {r: 0.19406594, g: 0.9433962, b: 0.013349922, a: 0}
   - name: 
     height: 0.4
-    Colour: {r: 0.6698113, g: 0.36516955, b: 0.0473923, a: 0}
+    Colour: {r: 0.2210558, g: 0.9245283, b: 0, a: 0}
   - name: 
     height: 1
-    Colour: {r: 0.009433985, g: 0.009405667, b: 0.009389485, a: 0}
+    Colour: {r: 0.23322952, g: 0.5660378, b: 0.088109665, a: 0}
   mapGeneration: {fileID: 6374774124178247071}
   tileRenderer: {fileID: 6374774124178247057}
   meshFilter: {fileID: 6374774124178247056}
   meshCollider: {fileID: 6374774124178247070}
   mapScale: 25
-  heightMultiplier: 50
+  heightMultiplier: 30
   heightCurve:
     serializedVersion: 2
     m_Curve:
@@ -171,5 +172,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  waves:
+  - seed: 5613
+    frequency: 1
+    amplitude: 1
+  - seed: 9551
+    frequency: 0.5
+    amplitude: 2
   tileNumber: 2500
   isWaypoint: 0
